@@ -8,8 +8,9 @@ must guess what the correct color is'''
 
 #Game setup: Initialize pygame and Display
 pygame.init()
-winDimen = (800,600)
-gameWindow = pygame.display.set_mode(winDimen)
+winDimen = (1200,900)
+flags = pygame.RESIZABLE | pygame.SCALED
+gameWindow = pygame.display.set_mode(winDimen, flags)
 
 pygame.display.set_caption("What The Bin?")
 
@@ -20,7 +21,7 @@ midRegion = winDimen[0]-2*edgePad
 midColumns = midRegion/3
 
 radius = (midColumns-circPad*2)/2
-font = pygame.font.SysFont(None,25)
+font = pygame.font.Font("assets/Midnew.ttf", 25)
 
 #Main loop. Runs everything
 def main():
@@ -71,7 +72,7 @@ def generateCircles(circleAmount):
     circlePos = []
     for x in range(circleAmount):
         randColor = [random.randint(0,255),random.randint(0,255),random.randint(0,255)]
-        #List of lists where each list is a color
+        # List of lists where each list is a color [[r,g,b]]
         colorList.append(randColor)
         position = (edgePad+midColumns*(x+1)-(radius+circPad),winDimen[0]/4)
         pygame.draw.circle(gameWindow, randColor, position, radius,0)
@@ -82,19 +83,10 @@ def generateCircles(circleAmount):
     return correctCircle, colorChoice, circlePos, colorList
 
 #Now the hard part, conversion to binary
-def decToBin(colorChoice):
-    binColor = ""
-    for x in colorChoice:
-        binStr = ""
-        for y in range(8):
-            place = 128/(2**y)
-            if x/place != 0:
-                binStr += "1"
-                x%=place
-            else:
-                binStr += "0"
-        binColor += binStr + " "
-    return binColor
+def decToBin(dec_color):
+    binColor = ["{0:08b}".format(x) for x in dec_color]
+    binColorStr = " ".join(binColor)
+    return binColorStr
 
 #Displays a horizontally centered message(text) on the screen at ycoord
 def messageOnScreen(text,ycoord):
