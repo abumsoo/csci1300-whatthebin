@@ -4,9 +4,9 @@ is equivalent to one of the colors of the three circles that are displayed. I
 used pygame to have a graphical interface and have user interaction outside of
 the command line.
 
-![alt text](what_the_bin_fail.png "Failed attempt")
+![alt text](assets/what_the_bin_fail.png "Failed attempt")
 
-![alt text](what_the_bin_success.png "Successful attempt")
+![alt text](assets/what_the_bin_success.png "Successful attempt")
 
 ## Decimal to Binary
 Pygame uses regular decimal numbers (from 0 to 255) to represent specific values
